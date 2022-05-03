@@ -5,8 +5,8 @@ function TodoList(id, name, done){
     this.done = done
 }
 
-exports.addTodo = (id, name, done, array = [])=>{
-
+exports.addTodo = (name, done, array = [])=>{
+    const id = array.length + 1;
     var t = new TodoList(id, name, done);
      array.push(t);
      return array;
