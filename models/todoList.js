@@ -1,15 +1,17 @@
 
-function TodoList(id, name, done){
+function TodoList(id, name, completed){
     this.id = id,
     this.name = name,
-    this.done = done
+    this.completed = completed
 }
 
-exports.addTodo = (name, done, array = [])=>{
+exports.addTodo = (name, completed, array = [])=>{
+    
     const id = array.length + 1;
-    var t = new TodoList(id, name, done);
+    var t = new TodoList(id, name, completed);
      array.push(t);
      return array;
+
 }
 
 exports.findTodo = (id, array = [])=>{
@@ -17,14 +19,14 @@ exports.findTodo = (id, array = [])=>{
      return array.find(c => c.id === parseInt(id));
 }
 
-exports.findDoneTodo = (array = [])=>{
-    const doneTodo = [];
+exports.findCompletedTodo = (array = [])=>{
+    const completedTodo = [];
     array.forEach(element => {
-       if(element.done){
-        doneTodo.push(element);
+       if(element.completed){
+        completedTodo.push(element);
        }
     });
-    return doneTodo;
+    return completedTodo;
 }
 
 exports.deleteTodo = (id, array = [])=>{
@@ -52,7 +54,7 @@ exports.updateTodo = (todo, array = [])=>{
         const index = array.indexOf(found);
         //Update object's name property.
         array[index].name = todo.name;
-        array[index].done = todo.done;
+        array[index].completed = todo.completed;
 
         return  array.find(c => c.id === parseInt(todo.id));
     }
@@ -62,7 +64,7 @@ exports.updateTodo = (todo, array = [])=>{
     }
 }
 
-exports.markDoneTodo = (todo, array = [])=>{
+exports.markCompletedTodo = (todo, array = [])=>{
 
     const found = array.find(c => c.id === parseInt(todo.id));
     
@@ -70,7 +72,7 @@ exports.markDoneTodo = (todo, array = [])=>{
         
         const index = array.indexOf(found);
         //Update object's name property.
-        array[index].done = true;
+        array[index].completed = true;
         
         return  array.find(c => c.id === parseInt(todo.id));
     }
