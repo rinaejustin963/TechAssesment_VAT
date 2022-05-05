@@ -40,11 +40,13 @@ app.get('/api/todosCompleted', (req, res) =>{
 app.post('/api/todos', (req, res) =>{
 
     if (req.body.name === "i'm lazy"){
-        res.sendStatus(403);
-    }
-    todos = todosModel.addTodo(req.body.name, req.body.completed, todos);
+        res.status(403).send("Error");
+    }else{
+        todos = todosModel.addTodo(req.body.name, req.body.completed, todos);
     
-    res.send(todos);
+        res.send(todos);
+    }
+
 });
 
 //Delete todo request Handler
