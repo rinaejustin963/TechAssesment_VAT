@@ -9,20 +9,26 @@ A REST API backend service that exposes a few services that can be used as a TOD
 2. Ensure that you have a latest(or recent version) of nodejs and Postman installed in your machine.
 3. Then We can use postman to test our API, using the endpoints provided.
 
-## Install
+## Install(To set up packages):
 
     npm init -y
     
     npm i express
     
     npm i joi
+    
+    npm i jest --save
+    
+    npm i supertest --save
+    
+    
 
 ## Run the app
 
     npm start
 
 ## Run the tests
-
+npm test
    
 
 # REST API
