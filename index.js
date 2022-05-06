@@ -19,7 +19,6 @@ app.get('/api/todos', (req, res) => {
     res.send(todos);
 });
 
-
 app.get('/api/todos/:id', (req, res) =>{
     const todo = todos.find(c=> c.id == parseInt(req.params.id));
 
@@ -46,14 +45,11 @@ app.post('/api/todos', (req, res) =>{
     
         res.send(todos);
     }
-
 });
 
 //Delete todo request Handler
 app.delete('/api/todos/:id', (req, res) =>{
 
-    
-    
     //Search the todos list
     const todo = todosModel.deleteTodo(req.params.id, todos);
     if(!todo) if(!todo) res.sendStatus(404);//Not available? Send 404 Error
@@ -63,14 +59,11 @@ app.delete('/api/todos/:id', (req, res) =>{
     }
  
     res.send(todo);
-    
-
 });
 
 //Update todo request Handler
 app.put('/api/todos/', (req, res) =>{
 
-    
     //Search the todos list
     const todo = todosModel.updateTodo(req.body, todos);
     if(!todo) if(!todo) res.sendStatus(404);//Not available? Send 404 Error
@@ -80,14 +73,11 @@ app.put('/api/todos/', (req, res) =>{
     }
     console.log(todos)
     res.send(todo);
-    
-
 });
 
 //Update Completed_todo request Handler
 app.put('/api/markCompletedtodos', (req, res) =>{
-
-    
+ 
     //Search the todos list
     const todo = todosModel.markCompletedTodo(req.body, todos);
     if(!todo) if(!todo) res.sendStatus(404); //Not available? Send 404 Error
@@ -97,10 +87,8 @@ app.put('/api/markCompletedtodos', (req, res) =>{
     }
     console.log(todos)
     res.send(todo);
-    
-
 });
 
 //PORT env variables
-const port = process.env.PORT || 8080;
-app.listen(port, () => console.log(`My App is listening at http://localhost:${port}`))
+const port = process.env.PORT || 8083;
+module.exports = app.listen(port, () => console.log(`My App is listening at http://localhost:${port}`))
