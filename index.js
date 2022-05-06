@@ -90,5 +90,5 @@ app.put('/api/markCompletedtodos', (req, res) =>{
 });
 
 //PORT env variables
-const port = process.env.PORT || 8080;
-app.listen(port, () => console.log(`My App is listening at http://localhost:${port}`))
+const port = process.env.PORT || 8083;
+module.exports = app.listen(port, () => console.log(`My App is listening at http://localhost:${port}`))
