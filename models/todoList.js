@@ -45,9 +45,9 @@ exports.deleteTodo = (id, array = [])=>{
     }
 }
 
-exports.updateTodo = (todo, array = [])=>{
+exports.updateTodo = (id, todo, array = [])=>{
 
-    const found = array.find(c => c.id === parseInt(todo.id));
+    const found = array.find(c => c.id === parseInt(id));
     
     if(found) {
         
@@ -56,7 +56,7 @@ exports.updateTodo = (todo, array = [])=>{
         array[index].name = todo.name;
         array[index].completed = todo.completed;
 
-        return  array.find(c => c.id === parseInt(todo.id));
+        return  array.find(c => c.id === parseInt(id));
     }
 
     else{
@@ -64,9 +64,9 @@ exports.updateTodo = (todo, array = [])=>{
     }
 }
 
-exports.markCompletedTodo = (todo, array = [])=>{
+exports.markCompletedTodo = (id, todo, array = [])=>{
 
-    const found = array.find(c => c.id === parseInt(todo.id));
+    const found = array.find(c => c.id === parseInt(id));
     
     if(found) {
         
@@ -74,7 +74,7 @@ exports.markCompletedTodo = (todo, array = [])=>{
         //Update object's name property.
         array[index].completed = true;
         
-        return  array.find(c => c.id === parseInt(todo.id));
+        return  array.find(c => c.id === parseInt(id));
     }
 
     else{

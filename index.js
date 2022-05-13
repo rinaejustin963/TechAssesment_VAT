@@ -1,5 +1,4 @@
 const express = require('express');
-const { string, boolean } = require('joi');
 const todosModel = require(__dirname+'/models/todoList.js')
 const app = express();
 app.use(express.json());
@@ -22,7 +21,9 @@ app.get('/api/todos', (req, res) => {
 app.get('/api/todos/:id', (req, res) =>{
     const todo = todos.find(c=> c.id == parseInt(req.params.id));
 
-    if(!todo) res.sendStatus(404);
+    if(!todo){ 
+        res.sendStatus(404);
+    }
     res.send(todo);
 });
 
@@ -31,7 +32,9 @@ app.get('/api/todosCompleted', (req, res) =>{
   
     const todo = todosModel.findCompletedTodo(todos);
 
-    if(!todo) res.sendStatus(404);
+    if(!todo){ 
+        res.sendStatus(404);
+    }
     res.send(todo);
 });
 
@@ -52,8 +55,9 @@ app.delete('/api/todos/:id', (req, res) =>{
 
     //Search the todos list
     const todo = todosModel.deleteTodo(req.params.id, todos);
-    if(!todo) if(!todo) res.sendStatus(404);//Not available? Send 404 Error
-
+    if(!todo){ 
+        res.sendStatus(404);//Not available? Send 404 Error
+    }
     else{
         console.log('Todo task was Deleted successfully');//If deleted successfully
     }
@@ -62,12 +66,13 @@ app.delete('/api/todos/:id', (req, res) =>{
 });
 
 //Update todo request Handler
-app.put('/api/todos/', (req, res) =>{
+app.put('/api/todos/:id', (req, res) =>{
 
     //Search the todos list
-    const todo = todosModel.updateTodo(req.body, todos);
-    if(!todo) if(!todo) res.sendStatus(404);//Not available? Send 404 Error
-
+    const todo = todosModel.updateTodo(req.params.id, req.body, todos);
+    if(!todo){ 
+        res.sendStatus(404);//Not available? Send 404 Error
+    }
     else{
         console.log('Todo task was Updated successfully');
     }
@@ -76,12 +81,13 @@ app.put('/api/todos/', (req, res) =>{
 });
 
 //Update Completed_todo request Handler
-app.put('/api/markCompletedtodos', (req, res) =>{
+app.put('/api/markCompletedtodos/:id', (req, res) =>{
  
     //Search the todos list
-    const todo = todosModel.markCompletedTodo(req.body, todos);
-    if(!todo) if(!todo) res.sendStatus(404); //Not available? Send 404 Error
-
+    const todo = todosModel.markCompletedTodo(req.params.id, req.body, todos);
+    if(!todo){ 
+        res.sendStatus(404); //Not available? Send 404 Error
+    }
     else{
         console.log('Todo task was Updated successfully');
     }
@@ -90,5 +96,5 @@ app.put('/api/markCompletedtodos', (req, res) =>{
 });
 
 //PORT env variables
-const port = process.env.PORT || 8083;
+const port = process.env.PORT || 8080;
 module.exports = app.listen(port, () => console.log(`My App is listening at http://localhost:${port}`))

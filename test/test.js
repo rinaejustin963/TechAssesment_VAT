@@ -20,16 +20,6 @@ describe('Todo Test', () => {
         expect(res.statusCode).toEqual(200)
       })
 
-      it('Add a new Todo item', async () => {
-        const res = await request(app)
-          .post('/api/todos').send({
-              name: 'Buy Grocery',
-              completed: false
-          })
-          expect(res.body.pop().name).toBe('Buy Grocery')
-        expect(res.statusCode).toEqual(200)
-      })
-
       it('Delete an existing Todo', async () => {
         const res = await request(app)
         .delete("/api/todos/1")
@@ -37,20 +27,18 @@ describe('Todo Test', () => {
         .get("/api/todos/")
         expect(res.statusCode).toEqual(200)
         expect(resGet.body[0].name).toBe('Pay rent')
-     
          
       })
 
       it('Update an existing Todo', async () => {
         const res = await request(app)
-        .put("/api/todos/").send({
-            id: 2,
+        .put("/api/todos/2").send({
             name: "Buy Groci",
             completed: true
         })
         const resGet = await request(app)
         .get("/api/todos/")
-        expect(res.statusCode).toEqual(200)
+        expect(res.statusCode).toEqual(200)  
         expect(resGet.body[0].name).toBe("Buy Groci")
      
          
@@ -65,12 +53,12 @@ describe('Todo Test', () => {
 
       it('Update a todo to completed', async () => {
         const res = await request(app)
-        .put("/api/markCompletedtodos").send({
-            id: 3
+        .put("/api/markCompletedtodos/3").send({
+  
         })
         const resGet = await request(app)
         .get("/api/todosCompleted")
-       // expect(res.statusCode).toEqual(200)
+        expect(res.statusCode).toEqual(200)
         expect(resGet.body[1].name).toBe("Take my Dog for a walk")
      
          
